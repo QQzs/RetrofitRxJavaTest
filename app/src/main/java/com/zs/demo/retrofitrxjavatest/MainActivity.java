@@ -5,13 +5,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.zs.demo.retrofitrxjavatest.bean.BaseResponse;
 import com.zs.demo.retrofitrxjavatest.bean.RequestBean;
 import com.zs.demo.retrofitrxjavatest.bean.TestBean;
 import com.zs.demo.retrofitrxjavatest.request.DefaultObserver;
 import com.zs.demo.retrofitrxjavatest.request.RequestApi;
 import com.zs.demo.retrofitrxjavatest.request.RequestBaseParams;
-import com.zs.demo.retrofitrxjavatest.request.RequestUtil;
 import com.zs.demo.retrofitrxjavatest.util.NewAES;
 
 import org.json.JSONException;
@@ -143,18 +141,18 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        mBtnUtilPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                RequestUtil.request("live-21",mObj.toString()).subscribe(new DefaultObserver<BaseResponse>() {
-                    @Override
-                    public void onSuccess(BaseResponse response) {
-
-                    }
-                });
-            }
-        });
+//        mBtnUtilPost.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                RequestUtil.request("live-21",mObj.toString()).subscribe(new DefaultObserver<BaseResponse>() {
+//                    @Override
+//                    public void onSuccess(BaseResponse response) {
+//
+//                    }
+//                });
+//            }
+//        });
 
 
     }
