@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonWriter;
-import com.zs.demo.retrofitrxjavatest.bean.RequestBean;
 import com.zs.demo.retrofitrxjavatest.util.NewAES;
 
 import java.io.IOException;
@@ -29,7 +28,6 @@ import retrofit2.Retrofit;
  * About: 自定义转换器 对返回的数据进行解密
  * —————————————————————————————————————
  */
-
 public class DecodeConverterFactory extends Converter.Factory {
 
     private final Gson gson;
@@ -43,7 +41,9 @@ public class DecodeConverterFactory extends Converter.Factory {
     }
 
     private DecodeConverterFactory(Gson gson) {
-        if (gson == null) throw new NullPointerException("gson == null");
+        if (gson == null) {
+            throw new NullPointerException("gson == null");
+        }
         this.gson = gson;
     }
 
@@ -57,20 +57,6 @@ public class DecodeConverterFactory extends Converter.Factory {
     public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
         return new DecodeRequestBodyConverter<>(gson, adapter);
-    }
-
-    public class DecodeResponseBodyConverter<T> implements Converter<ResponseBody, T> {
-        private final TypeAdapter<T> adapter;
-
-        DecodeResponseBodyConverter(TypeAdapter<T> adapter) {
-            this.adapter = adapter;
-        }
-
-        @Override
-        public T convert(ResponseBody value) throws IOException {
-            //解密字符串
-            return adapter.fromJson(NewAES.decrypt(value.string(), RequestBaseParams.IMEncodingAESKey));
-        }
     }
 
     public class DecodeRequestBodyConverter<T> implements Converter<T, RequestBody> {
@@ -91,6 +77,23 @@ public class DecodeConverterFactory extends Converter.Factory {
             adapter.write(jsonWriter,value);
             jsonWriter.flush();
             return RequestBody.create(MEDIA_TYPE,buffer.readByteString());
+        }
+    }
+
+    public class DecodeResponseBodyConverter<T> implements Converter<ResponseBody, T> {
+        private final TypeAdapter<T> adapter;
+
+        DecodeResponseBodyConverter(TypeAdapter<T> adapter) {
+            this.adapter = adapter;
+        }
+
+        @Override
+        public T convert(ResponseBody value) throws IOException {
+            // 解密字符串
+            return adapter.fromJson(NewAES.decrypt(value.string(), RequestBaseParams.IMEncodingAESKey));
+            // 如果没有加密处理
+//            return adapter.fromJson(value.string());
+
         }
     }
 }

@@ -1,7 +1,8 @@
-package com.zs.demo.retrofitrxjavatest.request;
+package com.zs.demo.retrofitrxjavatest.util;
 
 import com.zs.demo.retrofitrxjavatest.bean.BaseResponse;
-import com.zs.demo.retrofitrxjavatest.util.NewAES;
+import com.zs.demo.retrofitrxjavatest.request.RequestApi;
+import com.zs.demo.retrofitrxjavatest.request.RequestBaseParams;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

@@ -11,7 +11,7 @@ package com.zs.demo.retrofitrxjavatest.bean;
 
 public class BaseResponse {
 
-    private int status;
+    private int status = -1;
     private String error;
     private String message;
 

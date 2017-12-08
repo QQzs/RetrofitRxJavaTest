@@ -51,8 +51,16 @@
         android:id="@+id/tv_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="我的测试"
         android:layout_below="@+id/ll_main"
+        />
+
+    <TextView
+        android:id="@+id/tv_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\u3000我测试"
+        android:layout_below="@+id/tv_main"
         />
 
 </RelativeLayout>

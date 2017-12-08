@@ -9,7 +9,7 @@ package com.zs.demo.retrofitrxjavatest.bean;
  * —————————————————————————————————————
  */
 
-public class TestBean extends BaseResponse {
+public class MyZBBean extends BaseResponse{
 
     private String backgroundpic;
 

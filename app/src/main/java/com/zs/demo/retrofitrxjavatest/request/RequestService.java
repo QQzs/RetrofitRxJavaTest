@@ -1,7 +1,7 @@
 package com.zs.demo.retrofitrxjavatest.request;
 
 import com.zs.demo.retrofitrxjavatest.bean.BaseResponse;
-import com.zs.demo.retrofitrxjavatest.bean.TestBean;
+import com.zs.demo.retrofitrxjavatest.bean.MyZBBean;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -40,7 +40,7 @@ public interface RequestService {
 
     @FormUrlEncoded
     @POST("android")
-    Observable<TestBean> getTestData(@Field("version") String version,
+    Observable<MyZBBean> getTestData(@Field("version") String version,
                                      @Field("optioncode") String optioncode,
                                      @Field("timestamp") String timestamp,
                                      @Field("nonce") String nonce,
@@ -49,7 +49,7 @@ public interface RequestService {
 
     @FormUrlEncoded
     @POST("android")
-    Observable<TestBean> getTestData(@Field("optioncode") String optioncode,
+    Observable<MyZBBean> getTestData(@Field("optioncode") String optioncode,
                                      @Field("option") String option);
 
     @FormUrlEncoded

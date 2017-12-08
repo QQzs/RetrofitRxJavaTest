@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.zs.demo.retrofitrxjavatest.bean.RequestBean;
-import com.zs.demo.retrofitrxjavatest.bean.TestBean;
+import com.zs.demo.retrofitrxjavatest.bean.MyZBBean;
 import com.zs.demo.retrofitrxjavatest.request.DefaultObserver;
 import com.zs.demo.retrofitrxjavatest.request.RequestApi;
 import com.zs.demo.retrofitrxjavatest.request.RequestBaseParams;
@@ -122,9 +122,9 @@ public class MainActivity extends BaseActivity {
                         bean.getOptioncode(), bean.getOption())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new DefaultObserver<TestBean>() {
+                        .subscribe(new DefaultObserver<MyZBBean>() {
                             @Override
-                            public void onSuccess(TestBean response) {
+                            public void onSuccess(MyZBBean response) {
                                 mTv.setText(response.getBackgroundpic() + "\n" + response.getBegintime());
                             }
                         });
