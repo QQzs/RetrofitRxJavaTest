@@ -22,7 +22,6 @@ import retrofit2.http.POST;
 
 public interface RequestService {
 
-
     @GET("福利/10/1")
     Call<ResponseBody> getMzDatas();
 
