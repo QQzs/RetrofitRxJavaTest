@@ -19,6 +19,4 @@ public class RequestUtil {
         return request.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-
-
 }

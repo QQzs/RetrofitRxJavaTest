@@ -111,7 +111,7 @@ public class RequestApi {
         if (mOkHttpClient == null) {
             OkHttpClient.Builder builder = new OkHttpClient.Builder()
                     .retryOnConnectionFailure(true)//连接失败后是否重新连接
-                        .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)//超时时间
+                    .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)//超时时间
                     .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                     .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                     .addInterceptor(new HttpBaseParamsInterceptor());//拦截器

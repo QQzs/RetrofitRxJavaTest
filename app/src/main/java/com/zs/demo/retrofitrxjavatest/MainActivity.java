@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity {
 //                        .getTestData("live-21", mObj.toString())
 //                        .subscribeOn(Schedulers.io())
 //                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(new DefaultObserver<MyZBBean>() {
+//                        .subscribe(new DefaultObserver<MyZBBean>(MainActivity.this) {
 //                            @Override
 //                            public void onSuccess(MyZBBean response) {
 //                                mTv.setText(response.getBackgroundpic() + "\n" + response.getBegintime());
@@ -129,6 +129,11 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    /**
+     * 统一处理返回结果
+     * @param request
+     * @param type
+     */
     @Override
     protected void requestData(Observable request, int type) {
         Observable observable = RequestUtil.getObservable(request);
