@@ -1,7 +1,7 @@
 package com.zs.demo.retrofitrxjavatest.bean;
 
 
-import com.zs.demo.retrofitrxjavatest.request.RequestBaseParams;
+import com.zs.demo.retrofitrxjavatest.request.signature.SignatureParams;
 import com.zs.demo.retrofitrxjavatest.util.NewAES;
 
 /**
@@ -25,7 +25,7 @@ public class RequestBean {
     public RequestBean(String optioncode, String option) {
 
         this.optioncode = optioncode;
-        this.option = NewAES.encrypt(option,RequestBaseParams.IMEncodingAESKey);
+        this.option = NewAES.encrypt(option, SignatureParams.IMEncodingAESKey);
 
     }
 

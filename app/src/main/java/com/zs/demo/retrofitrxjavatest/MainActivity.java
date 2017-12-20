@@ -5,27 +5,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.zs.demo.retrofitrxjavatest.bean.RequestBean;
+import com.zs.demo.retrofitrxjavatest.base.BaseActivity;
 import com.zs.demo.retrofitrxjavatest.bean.MyZBBean;
+import com.zs.demo.retrofitrxjavatest.bean.RequestBean;
 import com.zs.demo.retrofitrxjavatest.request.DefaultObserver;
 import com.zs.demo.retrofitrxjavatest.request.RequestApi;
-import com.zs.demo.retrofitrxjavatest.request.RequestBaseParams;
+import com.zs.demo.retrofitrxjavatest.request.signature.SignatureParams;
 import com.zs.demo.retrofitrxjavatest.util.NewAES;
+import com.zs.demo.retrofitrxjavatest.util.RequestUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * @author Administrator
+ */
 public class MainActivity extends BaseActivity {
-
 
     private Button mBtnGet;
     private Button mBtnPost;
@@ -39,7 +42,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         mBtnGet = (Button) findViewById(R.id.btn_get_main);
         mBtnPost = (Button) findViewById(R.id.btn_post_main);
@@ -77,9 +79,6 @@ public class MainActivity extends BaseActivity {
 
                     }
                 });
-
-
-
             }
         });
 
@@ -96,7 +95,7 @@ public class MainActivity extends BaseActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
                             String back = response.body().string();
-                            mTv.setText(NewAES.decrypt(back, RequestBaseParams.IMEncodingAESKey));
+                            mTv.setText(NewAES.decrypt(back, SignatureParams.IMEncodingAESKey));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -107,54 +106,44 @@ public class MainActivity extends BaseActivity {
 
                     }
                 });
-
-
-
             }
         });
         mBtnRxjavaPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                RequestBean bean = new RequestBean("live-21",mObj.toString());
-
-                RequestApi.getInstance().getRequestService(RequestApi.REQUEST_URL1).getTestData(
-                        bean.getOptioncode(), bean.getOption())
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new DefaultObserver<MyZBBean>() {
-                            @Override
-                            public void onSuccess(MyZBBean response) {
-                                mTv.setText(response.getBackgroundpic() + "\n" + response.getBegintime());
-                            }
-                        });
-
-//                RequestApi.getInstance().getBaseService().getRJData()
+//                mRequestApi.getRequestService(RequestApi.REQUEST_URL1)
+//                        .getTestData("live-21", mObj.toString())
 //                        .subscribeOn(Schedulers.io())
 //                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(new DefaultObserver<BaseResponse>() {
+//                        .subscribe(new DefaultObserver<MyZBBean>() {
 //                            @Override
-//                            public void onSuccess(BaseResponse response) {
-//                                mTv.setText(response.getError());
+//                            public void onSuccess(MyZBBean response) {
+//                                mTv.setText(response.getBackgroundpic() + "\n" + response.getBegintime());
 //                            }
 //                        });
+
+                requestData(mRequestApi.getRequestService(RequestApi.REQUEST_URL1)
+                        .getTestData("live-21", mObj.toString()),1);
+
             }
         });
 
-//        mBtnUtilPost.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                RequestUtil.request("live-21",mObj.toString()).subscribe(new DefaultObserver<BaseResponse>() {
-//                    @Override
-//                    public void onSuccess(BaseResponse response) {
-//
-//                    }
-//                });
-//            }
-//        });
+    }
 
-
+    @Override
+    protected void requestData(Observable request, int type) {
+        Observable observable = RequestUtil.getObservable(request);
+        switch (type){
+            case 1:
+                observable.subscribe(new DefaultObserver<MyZBBean>(this) {
+                    @Override
+                    public void onSuccess(MyZBBean response) {
+                        mTv.setText(response.getBackgroundpic() + "\n" + response.getBegintime());
+                    }
+                });
+                break;
+        }
     }
 
     @Override
@@ -162,4 +151,8 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

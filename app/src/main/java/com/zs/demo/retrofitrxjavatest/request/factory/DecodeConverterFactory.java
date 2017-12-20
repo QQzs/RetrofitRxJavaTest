@@ -1,9 +1,10 @@
-package com.zs.demo.retrofitrxjavatest.request;
+package com.zs.demo.retrofitrxjavatest.request.factory;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonWriter;
+import com.zs.demo.retrofitrxjavatest.request.signature.SignatureParams;
 import com.zs.demo.retrofitrxjavatest.util.NewAES;
 
 import java.io.IOException;
@@ -90,7 +91,7 @@ public class DecodeConverterFactory extends Converter.Factory {
         @Override
         public T convert(ResponseBody value) throws IOException {
             // 解密字符串
-            return adapter.fromJson(NewAES.decrypt(value.string(), RequestBaseParams.IMEncodingAESKey));
+            return adapter.fromJson(NewAES.decrypt(value.string(), SignatureParams.IMEncodingAESKey));
             // 如果没有加密处理
 //            return adapter.fromJson(value.string());
 

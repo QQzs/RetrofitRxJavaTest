@@ -1,7 +1,8 @@
-package com.zs.demo.retrofitrxjavatest.request;
+package com.zs.demo.retrofitrxjavatest.request.factory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializeConfig;
+import com.zs.demo.retrofitrxjavatest.request.signature.SignatureParams;
 import com.zs.demo.retrofitrxjavatest.util.NewAES;
 
 import java.io.IOException;
@@ -75,7 +76,7 @@ public class FastJsonConverterFactory extends Converter.Factory {
         @Override
         public T convert(ResponseBody value) throws IOException {
             // 解密字符串
-            return JSON.parseObject(NewAES.decrypt(value.string(), RequestBaseParams.IMEncodingAESKey), mType);
+            return JSON.parseObject(NewAES.decrypt(value.string(), SignatureParams.IMEncodingAESKey), mType);
             // 如果没有加密处理
 //            return JSON.parseObject(value.string(), mType);
         }

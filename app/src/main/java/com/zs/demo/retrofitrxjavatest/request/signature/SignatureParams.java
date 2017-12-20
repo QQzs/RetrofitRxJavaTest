@@ -1,4 +1,4 @@
-package com.zs.demo.retrofitrxjavatest.request;
+package com.zs.demo.retrofitrxjavatest.request.signature;
 
 import java.security.MessageDigest;
 import java.util.Arrays;
@@ -11,8 +11,7 @@ import java.util.Arrays;
  * About:
  * —————————————————————————————————————
  */
-
-public class RequestBaseParams {
+public class SignatureParams {
     /**
      * 校验签名
      *

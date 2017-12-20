@@ -36,27 +36,25 @@ public abstract class DefaultObserver<T extends BaseResponse> implements Observe
     //  Activity 是否在执行onStop()时取消订阅
     private boolean isAddInStop = false;
 
-    public DefaultObserver() {
-    }
-
     public DefaultObserver(BaseImpl baseImpl) {
         mBaseImpl = baseImpl;
     }
 
     public DefaultObserver(BaseImpl baseImpl, boolean isShowLoading) {
         mBaseImpl = baseImpl;
-        if (isShowLoading) {
-            mBaseImpl.showProgress("正在加载...");
-        }
+//        if (isShowLoading) {
+//            mBaseImpl.showProgress("正在加载...");
+//        }
     }
 
     @Override
     public void onSubscribe(Disposable d) {
-//        if (isAddInStop) {    //  在onStop中取消订阅
-//            mBaseImpl.addRxStop(d);
-//        } else { //  在onDestroy中取消订阅
-//            mBaseImpl.addRxDestroy(d);
-//        }
+        //  在onStop中取消订阅
+        if (isAddInStop) {
+            mBaseImpl.addRxStop(d);
+        } else { //  在onDestroy中取消订阅
+            mBaseImpl.addRxDestroy(d);
+        }
     }
 
     @Override

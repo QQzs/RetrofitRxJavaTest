@@ -2,6 +2,9 @@ package com.zs.demo.retrofitrxjavatest.request;
 
 import android.text.TextUtils;
 
+import com.zs.demo.retrofitrxjavatest.request.factory.FastJsonConverterFactory;
+import com.zs.demo.retrofitrxjavatest.request.signature.SignatureParams;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +24,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
  * About:
  * —————————————————————————————————————
  */
-
 public class RequestApi {
 
     private final static int CONNECT_TIMEOUT = 30;
@@ -144,8 +146,8 @@ public class RequestApi {
                     .host(request.url().host())
                     .addQueryParameter("version", "2.5.0")
                     .addQueryParameter("timestamp", time)
-                    .addQueryParameter("nonce", RequestBaseParams.NONCE)
-                    .addQueryParameter("signature", RequestBaseParams.getSignature(time, RequestBaseParams.NONCE));
+                    .addQueryParameter("nonce", SignatureParams.NONCE)
+                    .addQueryParameter("signature", SignatureParams.getSignature(time, SignatureParams.NONCE));
 
             // 新的请求
             Request newRequest = request.newBuilder()
