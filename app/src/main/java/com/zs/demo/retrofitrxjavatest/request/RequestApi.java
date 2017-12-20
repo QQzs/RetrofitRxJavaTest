@@ -61,13 +61,12 @@ public class RequestApi {
         if (TextUtils.isEmpty(baseurl)) {
             baseurl = BASE_URL;
         }
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseurl)
                 .client(getOkHttpClient())
-//                .addConverterFactory(GsonConverterFactory.create()) //默认转换器
-//                .addConverterFactory(DecodeConverterFactory.create()) //自定义转换器
-                .addConverterFactory(FastJsonConverterFactory.create()) //FastJson解析转换器
+//                .addConverterFactory(GsonConverterFactory.create())   // 默认转换器
+//                .addConverterFactory(DecodeConverterFactory.create()) // 自定义转换器
+                .addConverterFactory(FastJsonConverterFactory.create()) // FastJson解析转换器
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         return retrofit;
@@ -122,7 +121,6 @@ public class RequestApi {
 //            } else {
 //                builder.cookieJar(mCookieJar);
 //            }
-
             mOkHttpClient = builder.build();
         }
         return mOkHttpClient;

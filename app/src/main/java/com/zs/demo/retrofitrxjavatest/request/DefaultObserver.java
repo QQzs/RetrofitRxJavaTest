@@ -28,12 +28,16 @@ import static com.zs.demo.retrofitrxjavatest.request.DefaultObserver.ExceptionRe
 
 
 /**
- * Created by zhpan on 2017/4/18.
+ *
+ * @author zhpan
+ * @date 2017/4/18
  */
-
 public abstract class DefaultObserver<T extends BaseResponse> implements Observer<T> {
+
     private BaseImpl mBaseImpl;
-    //  Activity 是否在执行onStop()时取消订阅
+    /**
+     * Activity 是否在执行onStop()时取消订阅
+     */
     private boolean isAddInStop = false;
 
     public DefaultObserver(BaseImpl baseImpl) {
@@ -65,17 +69,11 @@ public abstract class DefaultObserver<T extends BaseResponse> implements Observe
         } else {
             onFail(response);
         }
-        /*if (response.getCode() == 200) {
-            onSuccess(response);
-        } else {
-            onFail(response);
-        }*/
     }
 
     @Override
     public void onError(Throwable e) {
         LogUtils.e("Retrofit", e.getMessage());
-//        mBaseImpl.dismissProgress();
         if (e instanceof HttpException) {     //   HTTP错误
             onException(ExceptionReason.BAD_NETWORK);
         } else if (e instanceof ConnectException
@@ -90,6 +88,7 @@ public abstract class DefaultObserver<T extends BaseResponse> implements Observe
         } else {
             onException(UNKNOWN_ERROR);
         }
+        //  mBaseImpl.dismissProgress();
     }
 
     @Override

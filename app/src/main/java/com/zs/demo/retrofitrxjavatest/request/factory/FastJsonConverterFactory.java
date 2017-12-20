@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
  * Date：2017年 12月 08日
  * Time：14:18
  * —————————————————————————————————————
- * About:
+ * About: 自定义转换器 FastJson
  * —————————————————————————————————————
  */
 public class FastJsonConverterFactory extends Converter.Factory {

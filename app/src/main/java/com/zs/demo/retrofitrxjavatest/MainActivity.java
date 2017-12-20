@@ -33,7 +33,6 @@ public class MainActivity extends BaseActivity {
     private Button mBtnGet;
     private Button mBtnPost;
     private Button mBtnRxjavaPost;
-    private Button mBtnUtilPost;
     private TextView mTv;
 
     private JSONObject mObj;
@@ -46,7 +45,6 @@ public class MainActivity extends BaseActivity {
         mBtnGet = (Button) findViewById(R.id.btn_get_main);
         mBtnPost = (Button) findViewById(R.id.btn_post_main);
         mBtnRxjavaPost = (Button) findViewById(R.id.btn_rxjava_main);
-        mBtnUtilPost = (Button) findViewById(R.id.btn_util_main);
         mTv = (TextView) findViewById(R.id.tv_main);
 
         mObj = new JSONObject();
@@ -112,6 +110,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
+                requestData(mRequestApi.getRequestService(RequestApi.REQUEST_URL1)
+                        .getTestData("live-21", mObj.toString()),1);
+
 //                mRequestApi.getRequestService(RequestApi.REQUEST_URL1)
 //                        .getTestData("live-21", mObj.toString())
 //                        .subscribeOn(Schedulers.io())
@@ -122,9 +123,6 @@ public class MainActivity extends BaseActivity {
 //                                mTv.setText(response.getBackgroundpic() + "\n" + response.getBegintime());
 //                            }
 //                        });
-
-                requestData(mRequestApi.getRequestService(RequestApi.REQUEST_URL1)
-                        .getTestData("live-21", mObj.toString()),1);
 
             }
         });
