@@ -2,6 +2,9 @@ package com.zs.demo.retrofitrxjavatest.request;
 
 import android.text.TextUtils;
 
+import com.zs.demo.retrofitrxjavatest.MyApp;
+import com.zs.demo.retrofitrxjavatest.request.cookie.CookieJarImpl;
+import com.zs.demo.retrofitrxjavatest.request.cookie.SPCookieStore;
 import com.zs.demo.retrofitrxjavatest.request.factory.FastJsonConverterFactory;
 import com.zs.demo.retrofitrxjavatest.request.signature.SignatureParams;
 
@@ -114,6 +117,7 @@ public class RequestApi {
                     .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)//超时时间
                     .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                     .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+                    .cookieJar(new CookieJarImpl(new SPCookieStore(MyApp.getAppContext())))
                     .addInterceptor(new HttpBaseParamsInterceptor());//拦截器
 
 //            if (mCookieJar == null) {
