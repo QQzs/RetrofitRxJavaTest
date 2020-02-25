@@ -16,25 +16,25 @@ import retrofit2.http.POST;
  * Date：2017年 09月 22日
  * Time：10:34
  * —————————————————————————————————————
- * About:
+ * About: 接口
  * —————————————————————————————————————
  */
 
 public interface RequestService {
 
-    @GET("福利/10/1")
-    Call<ResponseBody> getMzDatas();
+    @GET("touch/reconstruct/article/list/BBM54PGAwangning/0-10.html")
+    Call<ResponseBody> getWYData();
 
     @FormUrlEncoded
     @POST("android")
-    Call<ResponseBody> getZBDatas(@Field("version") String version,
+    Call<ResponseBody> getZBData(@Field("version") String version,
                                   @Field("optioncode") String optioncode,
                                   @Field("timestamp") String timestamp,
                                   @Field("nonce") String nonce,
                                   @Field("option") String option,
                                   @Field("signature") String signature);
 
-    @GET("福利/10/1")
+    @GET("touch/reconstruct/article/list/BBM54PGAwangning/0-10.html")
     Observable<BaseResponse> getRJData();
 
     @FormUrlEncoded

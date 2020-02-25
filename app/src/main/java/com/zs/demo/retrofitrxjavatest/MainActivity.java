@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity {
 
     private Button mBtnGet;
     private Button mBtnPost;
-    private Button mBtnRxjavaPost;
+    private Button mBtnRxJavaPost;
     private TextView mTv;
 
     private JSONObject mObj;
@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity {
 
         mBtnGet = (Button) findViewById(R.id.btn_get_main);
         mBtnPost = (Button) findViewById(R.id.btn_post_main);
-        mBtnRxjavaPost = (Button) findViewById(R.id.btn_rxjava_main);
+        mBtnRxJavaPost = (Button) findViewById(R.id.btn_rxjava_main);
         mTv = (TextView) findViewById(R.id.tv_main);
 
         mObj = new JSONObject();
@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-                Call<ResponseBody> responseBodyCall = RequestApi.getInstance().getBaseService().getMzDatas();
+                Call<ResponseBody> responseBodyCall = RequestApi.getInstance().getBaseService().getWYData();
                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity {
             public void onClick(View view) {
 
                 RequestBean bean = new RequestBean("live-21",mObj.toString());
-                Call<ResponseBody> responseBodyCall = RequestApi.getInstance().getRequestService(RequestApi.REQUEST_URL1).getZBDatas(bean.getVersion(),
+                Call<ResponseBody> responseBodyCall = RequestApi.getInstance().getRequestService(RequestApi.REQUEST_URL1).getZBData(bean.getVersion(),
                         bean.getOptioncode(),bean.getTimestamp(),bean.getNonce(),bean.getOption(),bean.getSignature()
                 );
                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity {
                 });
             }
         });
-        mBtnRxjavaPost.setOnClickListener(new View.OnClickListener() {
+        mBtnRxJavaPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

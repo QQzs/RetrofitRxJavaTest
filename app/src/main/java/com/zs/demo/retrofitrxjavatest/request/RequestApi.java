@@ -32,7 +32,7 @@ public class RequestApi {
     private final static int CONNECT_TIMEOUT = 30;
     private final static int READ_TIMEOUT = 30;
 
-    public static final String BASE_URL = "http://gank.io/api/data/";
+    public static final String BASE_URL = "https://3g.163.com/";
     public static final String BASE_NEW_URL = "https://s.ibaodian.com/app/group/live/";
 
     public static final int REQUEST_URL1 = 1001;
